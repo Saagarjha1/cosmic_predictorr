@@ -9,7 +9,7 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 # Load the dataset from the CSV file
-file_path = '/workspaces/codespaces-flask/Real_time_dataset.csv'  # Update with your dataset file path
+file_path = 'Cosmic_Solar-wind/Real_time_dataset.csv'  # Update with your dataset file path
 df = pd.read_csv(file_path)
 
 # Drop rows with missing values in the target variable 'bt'
