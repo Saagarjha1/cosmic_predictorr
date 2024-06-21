@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Predictor</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Open+Sans:300);
+        * {
+          font-family: 'Open Sans', sans-serif;
+        }
+        
+        body {
+          margin: 0;
+          padding: 0;
+          overflow-y: scroll; /* Add scrollbar to y-axis */
+          background: #fff;
+          background-repeat: no-repeat;
+        }
+
+       /* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+        .container {
+          margin-top: 20px;
+        }
+        
+        .signupSection {
+          background: url(https://source.unsplash.com/TV2gg2kZD1o/1600x800);
+          background-repeat: no-repeat;
+          position: relative;
+          width: 800px;
+          height: 600px; /* Increased height to accommodate additional text box */
+          text-align: center;
+          display: flex;
+          color: white;
+          box-shadow: 3px 10px 20px 5px rgba(0, 0, 0, .5);
+          margin: auto;
+        }
+        
+        .info {
+          width: 45%;
+          background: rgba(20, 20, 20, .8);
+          padding: 30px 0;
+          border-right: 5px solid rgba(30, 30, 30, .8);
+          font-family: 'Open Sans', sans-serif;
+        }
+        
+        .info h2 {
+          padding-top: 30px;
+          font-weight: 300;
+        }
+        
+        .info p {
+          font-size: 18px;
+        }
+        
+        .info .icon {
+          font-size: 8em;
+          padding: 20px 0;
+          color: rgba(10, 180, 180, 1);
+        }
+        
+        .signupForm {
+          width: 70%;
+          padding: 30px 0;
+          background: rgba(20, 40, 40, .8);
+          transition: .2s;
+          font-family: 'Open Sans', sans-serif;
+        }
+        
+        .signupForm h2 {
+          font-weight: 300;
+        }
+        
+        .inputFields {
+          margin-bottom: 20px;
+          font-size: 16px;
+          padding: 10px;
+          width: 250px;
+          border: 1px solid rgba(10, 180, 180, 1);
+          border-top: none;
+          border-left: none;
+          border-right: none;
+          background: rgba(20, 20, 20, .2);
+          color: white;
+          outline: none;
+        }
+    
+        .user-box {
+          display: inline-block;
+          margin-bottom: 20px;
+          width: 48%; /* Adjust width as needed */
+          text-align: left;
+        }
+    
+        .user-box label {
+          display: block;
+          margin-bottom: 5px;
+        }
+    
+        .user-box input[type="number"], .user-box input[type="text"] {
+          width: calc(100% - 10px);
+        }
+        
+        .noBullet {
+          list-style-type: none;
+          padding: 0;
+        }
+        
+        #center-btn {
+          text-align: center;
+        }
+        
+        #join-btn {
+          border: 1px solid rgba(10, 180, 180, 1);
+          background: rgba(20, 20, 20, .6);
+          font-size: 18px;
+          color: white;
+          margin-top: 20px;
+          padding: 10px 50px;
+          cursor: pointer;
+          transition: .4s;
+        }
+        
+        #join-btn:hover {
+          background: rgba(20, 20, 20, .8);
+          padding: 10px 80px;
+        }
+
+        /* Button CSS */
+        .signupForm input[type="submit"] {
+          position: relative;
+          display: inline-block;
+          padding: 10px 20px;
+          color: #03e9f4;
+          font-size: 16px;
+          text-decoration: none;
+          text-transform: uppercase;
+          overflow: hidden;
+          transition: .5s;
+          margin-top: 40px;
+          letter-spacing: 4px;
+          border: none;
+          cursor: pointer;
+          background: transparent;
+          outline: none;
+        }
+        
+        .signupForm input[type="submit"]:hover {
+          background: #03e9f4;
+          color: #fff;
+          border-radius: 5px;
+          box-shadow: 0 0 5px #03e9f4,
+                      0 0 25px #03e9f4,
+                      0 0 50px #03e9f4,
+                      0 0 100px #03e9f4;
+        }
+        
+        .signupForm input[type="submit"] span {
+          position: absolute;
+          display: block;
+        }
+        
+        .signupForm input[type="submit"] span:nth-child(1) {
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 2px;
+          background: linear-gradient(90deg, transparent, #03e9f4);
+          animation: btn-anim1 1s linear infinite;
+        }
+        
+        @keyframes btn-anim1 {
+          0% {
+            left: -100%;
+          }
+          50%,100% {
+            left: 100%;
+          }
+        }
+        
+        .signupForm input[type="submit"] span:nth-child(2) {
+          top: -100%;
+          right: 0;
+          width: 2px;
+          height: 100%;
+          background: linear-gradient(180deg, transparent, #03e9f4);
+          animation: btn-anim2 1s linear infinite;
+          animation-delay: .25s;
+        }
+        
+        @keyframes btn-anim2 {
+          0% {
+            top: -100%;
+          }
+          50%,100% {
+            top: 100%;
+          }
+        }
+        
+        .signupForm input[type="submit"] span:nth-child(3) {
+          bottom: 0;
+          right: -100%;
+          width: 100%;
+          height: 2px;
+          background: linear-gradient(270deg, transparent, #03e9f4);
+          animation: btn-anim3 1s linear infinite;
+          animation-delay: .5s;
+        }
+        
+        @keyframes btn-anim3 {
+          0% {
+            right: -100%;
+          }
+          50%,100% {
+            right: 100%;
+          }
+        }
+        
+        .signupForm input[type="submit"] span:nth-child(4) {
+          bottom: -100%;
+          left: 0;
+          width: 2px;
+          height: 100%;
+          background: linear-gradient(360deg, transparent, #03e9f4);
+          animation: btn-anim4 1s linear infinite;
+          animation-delay: .75s;
+        }
+        
+        @keyframes btn-anim4 {
+          0% {
+            bottom: -100%;
+          }
+          50%,100% {
+            bottom: 100%;
+          }
+        }
+
+        /* Prediction Result Container */
+        .prediction-container {
+          margin-top: 20px;
+          text-align: center;
+        }
+        .container3 {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f7f9fc;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+
+        .container3 h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #2980b9;
+        }
+
+        .application {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .application h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #27ae60;
+        }
+
+        .application p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="#container">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#output">output</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#application">Application</a>
+            </li>
+          </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-3">
+        <div class="signupSection">
+            <div class="info">
+              <h2>Mission to Deep Space</h2>
+              <i class="icon ion-ios-ionic-outline" aria-hidden="true"></i>
+              <p>The Future Is Here</p>
+            </div>
+            <form action="/predict" method="post" class="signupForm" name="signupform">
+              <h2>Solar Wind Input Form</h2>
+              <ul class="noBullet">
+            
+                  <li>
+                     <div class="user-box">
+                       <label for="bx_gsm">bx_gsm:</label>
+                       <input type="number" name="bx_gsm" step="0.01" value="0" oninput="updateCombinedValues()">
+             </div>
+             <div class="user-box">
+               <label for="by_gsm">by_gsm:</label>
+               <input type="number" name="by_gsm" step="0.01" value="0" oninput="updateCombinedValues()">
+             </div>
+             <div class="user-box">
+               <label for="bz_gsm">bz_gsm:</label>
+               <input type="number" name="bz_gsm" step="0.01" value="0" oninput="updateCombinedValues()">
+             </div>
+             <div class="user-box">
+               <label for="theta_gsm">theta_gsm:</label>
+               <input type="number" name="theta_gsm" step="0.01" value="0" oninput="updateCombinedValues()">
+             </div>
+             <div class="user-box">
+               <label for="phi_gsm">phi_gsm:</label>
+               <input type="number" name="phi_gsm" step="0.01" value="0" oninput="updateCombinedValues()">
+             </div>
+             <div class="user-box">
+               <label for="density">density:</label>
+               <input type="number" name="density" step="0.01" value="0" oninput="updateCombinedValues()">
+             </div>
+             <div class="user-box">
+               <label for="speed">speed:</label>
+               <input type="number" name="speed" step="0.01" value="0" oninput="updateCombinedValues()">
+             </div>
+             <div class="user-box">
+               <label for="temperature">temperature:</label>
+               <input type="number" name="temperature" step="0.01" value="0" oninput="updateCombinedValues()">
+             </div>
+             <div class="user-box">
+               <label for="combined_values">Combined Values:</label>
+               <input type="text" id="combined_values" name="combined_values" oninput="updateIndividualValues(this.value)">
+             </div>
+                      <!-- Add other input fields here -->
+                  </li>
+              </ul>
+              <input type="submit" id="join-btn" name="join" alt="Predict" value="Predict">
+          </form>
+          
+    </div>
+    {% if gb_prediction or rf_prediction %}
+    <div id="output" class="prediction-container">
+        <h2>Predictions</h2>
+        {% if gb_prediction %}
+        <p> HistGradient Boosting Regressor: {{ gb_prediction }}</p>
+        {% endif %}
+        {% if rf_prediction %}
+        <p> Random Forest Regressor: {{ rf_prediction }}</p>
+        {% endif %}
+        <img src="{{ url_for('static', filename='predictions_plot.png') }}" alt="Prediction Plot" width="600">
+    </div>
+    {% endif %}
+    <br>
+    <div class="container3">
+      <h2>Space Applications</h2>
+      
+      <div id="application" class="application">
+          <h3>Space Weather Forecasting</h3>
+          <p>Crucial for predicting events like geomagnetic storms, which can disrupt satellites, communications, and pose risks to astronauts.</p>
+      </div>
+
+      <div class="application">
+          <h3>Satellite and Spacecraft Operations</h3>
+          <p>Essential for safeguarding spacecraft and satellites, ensuring the safety of onboard systems.</p>
+      </div>
+
+      <div class="application">
+          <h3>Earth's Magnetosphere Monitoring</h3>
+          <p>Aids in understanding changes in Earth's magnetosphere, vital for space weather research.</p>
+      </div>
+
+      <div class="application">
+          <h3>Auroral Activity Prediction</h3>
+          <p>Helps forecast the intensity and location of auroral displays, such as the Northern and Southern Lights.</p>
+      </div>
+
+      <div class="application">
+          <h3>Radiation Hazard Assessment</h3>
+          <p>Contributes to assessing radiation hazards for astronauts and spacecraft, aiding in risk mitigation.</p>
+      </div>
+  </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <script>
+      function updateCombinedValue() {
+          var inputFields = document.querySelectorAll(".user-box input[type='number']");
+          var combinedValue = Array.from(inputFields).map(function(input) {
+              return input.value.trim();
+          }).join(",");
+          document.getElementById('combined_values').value = combinedValue;
+      }
+  
+      function updateIndividualValues(combinedValue) {
+          var individualValues = combinedValue.split(",");
+          var inputFields = document.querySelectorAll(".user-box input[type='number']");
+  
+          individualValues.forEach(function(value, index) {
+              if (index < inputFields.length) {
+                  inputFields[index].value = value.trim();
+              }
+          });
+      }
+  
+      // Listen for input event on each individual input field
+      var inputFields = document.querySelectorAll(".user-box input[type='number']");
+      inputFields.forEach(function(inputField) {
+          inputField.addEventListener('input', function() {
+              updateCombinedValue();
+          });
+      });
+  
+      // Listen for input event on the combined values field
+      document.getElementById('combined_values').addEventListener('input', function(event) {
+          var combinedValue = event.target.value;
+          updateIndividualValues(combinedValue);
+      });
+  </script>
+  
+</body>
+</html>
